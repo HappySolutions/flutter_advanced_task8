@@ -10,8 +10,8 @@ part 'posts_event.dart';
 part 'posts_state.dart';
 
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
-  final PostsRepo _postsRepo;
-  PostsBloc(this._postsRepo) : super(PostsInitial()) {
+  final PostsRepo postsRepo;
+  PostsBloc({required this.postsRepo}) : super(PostsInitial()) {
     on<GetPostsEvent>(loadPosts);
   }
 
@@ -19,7 +19,7 @@ class PostsBloc extends Bloc<PostsEvent, PostsState> {
       GetPostsEvent event, Emitter<PostsState> emit) async {
     emit(PostsLoadingState());
     try {
-      final posts = await _postsRepo.getPosts();
+      final posts = await postsRepo.getPosts();
       if (posts.isEmpty) {
         emit(PostsEmptyState());
       } else {

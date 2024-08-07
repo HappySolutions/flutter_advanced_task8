@@ -8,12 +8,9 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
   runApp(
-    BlocProvider<PostsBloc>(
-      create: (context) => PostsBloc(PostsRepo()),
-      child: DevicePreview(
-        enabled: !kReleaseMode,
-        builder: (context) => const MyApp(),
-      ),
+    DevicePreview(
+      enabled: !kReleaseMode,
+      builder: (context) => const MyApp(),
     ),
   );
 }
@@ -29,7 +26,13 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: const HomePage(),
+      home: RepositoryProvider<PostsRepo>(
+          create: (context) => PostsRepo(),
+          child: BlocProvider(
+            create: (BuildContext context) =>
+                PostsBloc(postsRepo: context.read<PostsRepo>()),
+            child: const HomePage(),
+          )),
     );
   }
 }
