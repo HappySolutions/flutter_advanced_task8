@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_task8/bloc/posts_bloc.dart';
-import 'package:flutter_advanced_task8/components/post_card.dart';
-import 'package:flutter_advanced_task8/components/post_preview.dart';
+import 'package:flutter_advanced_task8/widgets/posts_list_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 class HomePage extends StatefulWidget {
@@ -28,31 +27,7 @@ class _HomePageState extends State<HomePage> {
             return const Center(child: CircularProgressIndicator());
           }
           if (state is PostsLoadedState) {
-            return ListView.separated(
-                padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                shrinkWrap: true,
-                physics: const ScrollPhysics(),
-                itemBuilder: (BuildContext context, int index) {
-                  final post = state.posts[index];
-                  return InkWell(
-                    onTap: () {
-                      showModalBottomSheet(
-                        isScrollControlled: true,
-                        context: context,
-                        builder: (context) {
-                          return Padding(
-                              padding: MediaQuery.of(context).viewInsets,
-                              child: PostPreview(post: post));
-                        },
-                      );
-                    },
-                    child: PostCard(post: post),
-                  );
-                },
-                separatorBuilder: (BuildContext context, int index) {
-                  return const Divider();
-                },
-                itemCount: state.posts.length);
+            return PostsListWidget(posts: state.posts);
           }
           if (state is PostsEmptyState) {
             return const Center(

@@ -10,30 +10,29 @@ class PostCard extends StatelessWidget {
     Size size = MediaQuery.of(context).size;
 
     return Container(
-        height: 150,
-        width: size.width,
-        padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
-        decoration: BoxDecoration(
-          color: Colors.green.withOpacity(0.05),
-          borderRadius: BorderRadius.circular(12),
-        ),
-        child: Expanded(
-          flex: 4,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(
-                post.title ?? 'No title',
-                style: const TextStyle(
-                    fontSize: 12.0, fontWeight: FontWeight.w500),
-              ),
-              const SizedBox(height: 4.0),
-              Text(
-                post.body ?? 'No Text',
-                style: const TextStyle(fontSize: 10.0),
-              ),
-            ],
+      height: 150,
+      width: size.width,
+      padding: const EdgeInsets.symmetric(horizontal: 10.0, vertical: 20.0),
+      decoration: BoxDecoration(
+        color: Colors.green.withOpacity(0.05),
+        borderRadius: BorderRadius.circular(12),
+      ),
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(
+            post.title ?? 'No title',
+            style: const TextStyle(fontSize: 15.0, fontWeight: FontWeight.w600),
           ),
-        ));
+          const SizedBox(height: 10.0),
+          Text(
+            overflow: TextOverflow.ellipsis,
+            maxLines: 3,
+            post.body ?? 'No Text',
+            style: const TextStyle(fontSize: 12.0),
+          ),
+        ],
+      ),
+    );
   }
 }

@@ -19,15 +19,10 @@ class PostPreview extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  post.title ?? 'No title',
-                  style: const TextStyle(
-                      fontSize: 12.0, fontWeight: FontWeight.w500),
-                ),
-              ],
+            Text(
+              post.title ?? 'No title',
+              style:
+                  const TextStyle(fontSize: 12.0, fontWeight: FontWeight.w500),
             ),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 6.0),
