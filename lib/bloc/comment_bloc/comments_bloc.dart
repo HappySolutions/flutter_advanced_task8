@@ -8,9 +8,10 @@ part 'comments_event.dart';
 part 'comments_state.dart';
 
 class CommentsBloc extends Bloc<CommentsEvent, CommentsState> {
-  final CommentsRepo commentsRepo;
+  late CommentsRepo commentsRepo;
 
-  CommentsBloc({required this.commentsRepo}) : super(CommentsInitial()) {
+  CommentsBloc() : super(CommentsInitial()) {
+    commentsRepo = CommentsRepo();
     on<GetCommentsEvent>(loadComments);
   }
 

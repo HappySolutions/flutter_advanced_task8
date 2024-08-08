@@ -12,7 +12,19 @@ void main() {
   runApp(
     DevicePreview(
       enabled: !kReleaseMode,
-      builder: (context) => const MyApp(),
+      builder: (context) {
+        return MultiBlocProvider(
+          providers: [
+            BlocProvider(
+              create: (context) => PostsBloc(),
+            ),
+            BlocProvider(
+              create: (context) => CommentsBloc(),
+            ),
+          ],
+          child: const MyApp(),
+        );
+      },
     ),
   );
 }
@@ -28,29 +40,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home: MultiRepositoryProvider(
-        providers: [
-          RepositoryProvider<PostsRepo>(
-            create: (context) => PostsRepo(),
-          ),
-          RepositoryProvider<CommentsRepo>(
-            create: (context) => CommentsRepo(),
-          ),
-        ],
-        child: MultiBlocProvider(
-          providers: [
-            BlocProvider(
-              create: (BuildContext context) =>
-                  PostsBloc(postsRepo: context.read<PostsRepo>()),
-            ),
-            BlocProvider(
-              create: (BuildContext context) =>
-                  CommentsBloc(commentsRepo: context.read<CommentsRepo>()),
-            ),
-          ],
-          child: const HomePage(),
-        ),
-      ),
+      home: const HomePage(),
     );
   }
 }

@@ -9,8 +9,9 @@ part 'posts_event.dart';
 part 'posts_state.dart';
 
 class PostsBloc extends Bloc<PostsEvent, PostsState> {
-  final PostsRepo postsRepo;
-  PostsBloc({required this.postsRepo}) : super(PostsInitial()) {
+  late PostsRepo postsRepo;
+  PostsBloc() : super(PostsInitial()) {
+    postsRepo = PostsRepo();
     on<GetPostsEvent>(loadPosts);
   }
 
