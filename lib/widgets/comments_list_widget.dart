@@ -37,6 +37,13 @@ class CommentsList extends StatelessWidget {
                 Text(
                   overflow: TextOverflow.ellipsis,
                   maxLines: 3,
+                  comment.email ?? 'No Text',
+                  style: const TextStyle(fontSize: 12.0),
+                ),
+                const SizedBox(height: 10.0),
+                Text(
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 3,
                   comment.body ?? 'No Text',
                   style: const TextStyle(fontSize: 12.0),
                 ),

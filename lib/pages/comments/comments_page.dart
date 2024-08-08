@@ -23,7 +23,7 @@ class _CommentsPageState extends State<CommentsPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(widget.post.title ?? 'No title'),
+        title: const Text('Post Comments'),
       ),
       body: BlocBuilder<CommentsBloc, CommentsState>(
         builder: (context, state) {
