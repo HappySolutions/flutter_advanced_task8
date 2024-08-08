@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_task8/components/post_card.dart';
 import 'package:flutter_advanced_task8/components/post_preview.dart';
-import 'package:flutter_advanced_task8/data/models/posts.dart';
+import 'package:flutter_advanced_task8/data/models/post.dart';
 
 class PostsListWidget extends StatelessWidget {
   final List<Post> posts;

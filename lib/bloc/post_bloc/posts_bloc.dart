@@ -1,8 +1,7 @@
 import 'dart:async';
 
 import 'package:bloc/bloc.dart';
-import 'package:equatable/equatable.dart';
-import 'package:flutter_advanced_task8/data/models/posts.dart';
+import 'package:flutter_advanced_task8/data/models/post.dart';
 import 'package:flutter_advanced_task8/data/repo/posts_repo.dart';
 import 'package:meta/meta.dart';
 

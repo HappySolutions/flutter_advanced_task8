@@ -1,40 +1,46 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_task8/bloc/post_bloc/posts_bloc.dart';
-import 'package:flutter_advanced_task8/widgets/posts_list_widget.dart';
+import 'package:flutter_advanced_task8/bloc/comment_bloc/comments_bloc.dart';
+import 'package:flutter_advanced_task8/data/models/post.dart';
+import 'package:flutter_advanced_task8/widgets/comments_list_widget.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
-class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+class CommentsPage extends StatefulWidget {
+  final Post post;
+  const CommentsPage({required this.post, super.key});
 
   @override
-  State<HomePage> createState() => _HomePageState();
+  State<CommentsPage> createState() => _CommentsPageState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _CommentsPageState extends State<CommentsPage> {
   @override
   void initState() {
-    context.read<PostsBloc>().add(GetPostsEvent());
+    context.read<CommentsBloc>().add(GetCommentsEvent(widget.post.id ?? 1));
     super.initState();
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(),
-      body: BlocBuilder<PostsBloc, PostsState>(
+      appBar: AppBar(
+        title: Text(widget.post.title ?? 'No title'),
+      ),
+      body: BlocBuilder<CommentsBloc, CommentsState>(
         builder: (context, state) {
-          if (state is PostsLoadingState) {
+          if (state is CommentsLoadingState) {
             return const Center(child: CircularProgressIndicator());
           }
-          if (state is PostsLoadedState) {
-            return PostsListWidget(posts: state.posts);
-          }
-          if (state is PostsEmptyState) {
-            return const Center(
-              child: Text('No posts found'),
+          if (state is CommentsLoadedState) {
+            return CommentsList(
+              comments: state.comments,
             );
           }
-          if (state is PostsLoadingErrorState) {
+          if (state is CommentsEmptyState) {
+            return const Center(
+              child: Text('No comments found'),
+            );
+          }
+          if (state is CommentsLoadingErrorState) {
             return Center(
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.center,

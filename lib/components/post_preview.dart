@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_advanced_task8/data/models/posts.dart';
+import 'package:flutter_advanced_task8/data/models/post.dart';
+import 'package:flutter_advanced_task8/pages/comments/comments_page.dart';
 
 class PostPreview extends StatelessWidget {
   final Post post;
@@ -17,20 +18,46 @@ class PostPreview extends StatelessWidget {
       decoration: const BoxDecoration(color: Colors.white),
       child: SingleChildScrollView(
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(
-              post.title ?? 'No title',
-              style:
-                  const TextStyle(fontSize: 12.0, fontWeight: FontWeight.w500),
+            Row(
+              children: [
+                const Text(
+                  'Post Title: ',
+                  style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  post.title ?? 'No title',
+                  style: const TextStyle(
+                      fontSize: 15.0, fontWeight: FontWeight.w500),
+                ),
+              ],
             ),
             const Padding(
               padding: EdgeInsets.symmetric(vertical: 6.0),
               child: Divider(),
             ),
+            const Text(
+              'Post body: ',
+              style: TextStyle(fontSize: 15.0, fontWeight: FontWeight.w500),
+            ),
             Text(
               post.body ?? 'No text',
               style: const TextStyle(fontSize: 10.0, height: 1.5),
+            ),
+            const SizedBox(
+              height: 20,
+            ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => CommentsPage(
+                              post: post,
+                            )));
+              },
+              child: const Text('Show Comments'),
             ),
           ],
         ),
