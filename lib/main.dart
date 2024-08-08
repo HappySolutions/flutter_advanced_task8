@@ -3,9 +3,7 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_advanced_task8/bloc/comment_bloc/comments_bloc.dart';
 import 'package:flutter_advanced_task8/bloc/post_bloc/posts_bloc.dart';
-import 'package:flutter_advanced_task8/data/repo/comments_repo.dart';
 import 'package:flutter_advanced_task8/pages/home/home_page.dart';
-import 'package:flutter_advanced_task8/data/repo/posts_repo.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
 void main() {
@@ -35,7 +33,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Bloc With API Demo',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
